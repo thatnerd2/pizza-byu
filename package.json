@@ -1,0 +1,22 @@
+{
+  "name": "pizza-byu",
+  "version": "1.0.0",
+  "description": "BYU Pizza service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://thatnerd2@bitbucket.org/thatnerd2/pizza-byu.git"
+  },
+  "keywords": [
+    "pizza"
+  ],
+  "author": "Aaron Y. Chan, Matthew C. Price",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/thatnerd2/pizza-byu#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
