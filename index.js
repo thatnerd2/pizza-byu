@@ -15,6 +15,9 @@ dominos.Util.findNearbyStores(
 		// and the store that is open
 		// 
 		var stores = storeData.result.Stores;
+    for (var i = 0; i < stores.length; i++) {
+      console.log(stores[i]);
+    }
 		//console.log(storeData);
 	}
 );

@@ -49,5 +49,8 @@
     "run-sequence": "^1.1.5",
     "semantic-ui": "^2.1.8",
     "yamljs": "^0.2.4"
+  },
+  "devDependencies": {
+    "pizzapi": "0.0.8"
   }
 }
