@@ -8,11 +8,115 @@
 
 <body>
 
-	<div class="ui centered grid">
-		<div class="row">
-      
-		</div>
+	<div class="ui grid">
+    <div class="two wide column"></div>
+    <div class="twelve wide column">
+      <div class="row">
+        <div class="ui huge message">
+          <center><h2>Create your Order</h2></center>
+        </div>
+      </div>
+      <div style="padding-bottom: 20px;" class="row"></div>
+      <div class="ui grid">
+        <div class="row">
+      		<div class="five wide column">
+            <div class="ui vertical steps">
+              <div id="step-store" class="active step">
+                <i class="building icon"></i>
+                <div class="content">
+                  <div class="title">Store</div>
+                  <div class="description">Choose your store location.</div>
+                </div>
+              </div>
+              <div id="step-order" class="step">
+                <i class="food icon"></i>
+                <div class="content">
+                  <div class="title">Order</div>
+                  <div class="description">Customize your pizza.</div>
+                </div>
+              </div>
+              <div id="step-billing" class="step">
+                <i class="credit card icon"></i>
+                <div class="content">
+                  <div class="title">Billing</div>
+                  <div class="description">Sign in to your Net ID to pay with<br /> Dining Dollars or Cougar Cash.</div>
+                </div>
+              </div>
+              <div id="step-confirm" class="step">
+                <i class="info icon"></i>
+                <div class="content">
+                  <div class="title">Confirm Order</div>
+                  <div class="description">Verify order details</div>
+                </div>
+              </div>
+              <div id="step-billing" class="step">
+                <i class="car icon"></i>
+                <div class="content">
+                  <div class="title">Get Pizza</div>
+                  <div class="description">Tracking right from Dominos.</div>
+                </div>
+              </div>
+            </div>
+            <a href="index.html" class="ui red button">Cancel</a>
+      		</div>
+          <div class="eleven wide column">
+            <div class="ui horizontal divider">Choose a Store</div>
+            <div id="store-picker" class="ui selection dropdown">
+              <div id="store-picker-text" class="text">Available Stores:</div>
+              <i class="dropdown icon"></i>
+              <div id="store-picker-content" class="menu">
+                <div class="item">AJAX populates this</div>
+              </div>
+            </div>
+            <br /><br />
+            <p>We suggest: <b>SUGGESTION_HERE</b></p>
+            <p>This is the closest store to you, is open right now, and does delivery.</p>
+
+            <div class="ui horizontal divider">Customize Order</div>
+            <p>Dominos stuff goes in here</p>
+
+            <div class="ui horizontal divider">Billing</div>
+            <div class="ui icon message">
+              <i class="lock icon"></i>
+              <div class="content">
+                <div class="header">
+                  Security Notice
+                </div>
+                <p>Make sure that when logging in, you are directed to a BYU website (cas.byu.edu).  We do not know your credentials - only you and BYU do.</p>
+              </div>
+            </div>
+            <a class="ui green button" href="auth.html">Click here to authenticate with your Net ID.</a>
+            
+            <div class="ui horizontal divider">Confirm</div>
+            <p>Some javascript generated stuff here.  Validation too!</p>
+
+            <div class="ui horizontal divider">Submit</div>
+            <a class="ui black button">Submit your order</a>
+
+            <p>Thank you for using our website!  It really does mean a lot! <i class="smile icon"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="two wide column"></div>
+
+
 
 	</div>
 
 </body>
+
+<script>
+  var currentStep = 0;
+
+  $("#store-picker").dropdown({
+    onChange: function (v) {
+      if (currentStep == 0) {
+        $("#step-store").removeClass("active").addClass("completed");
+        $("#step-order").addClass("active");
+        currentStep = 1;
+      }
+    }
+  });
+</script>
+</html>
