@@ -5,6 +5,8 @@ var http = require('http');
 var server = http.Server(app);
 var fs = require('fs');
 var port = process.env.PORT || 4004
+
+// This is a simple demo of the dominos API.
 /*dominos.Util.findNearbyStores(
 	'25 Heritage Halls, Provo, UT, 84604',
 	'Delivery',
@@ -31,36 +33,6 @@ var port = process.env.PORT || 4004
 
 app.use(express.static('public'));
 server.listen(port);
-
-
-
-/*var options = {
-  host: 'api.byu.edu',
-  path: '/rest/v1/basicauth/treasury/cougar-cash/balance'
-};
-
-https://api.byu.edu/rest/v1/basicauth/treasury/cougar-cash/balance'
-var req = http.get(options, function(res) {
-  console.log("I'M BACK!");
-  console.log('STATUS: ' + res.statusCode);
-  console.log('HEADERS: ' + JSON.stringify(res.headers));
-
-  // Buffer the body entirely for processing as a whole.
-  var bodyChunks = [];
-  res.on('data', function(chunk) {
-    // You can process streamed parts here...
-    bodyChunks.push(chunk);
-  }).on('end', function() {
-    var body = Buffer.concat(bodyChunks);
-    console.log('BODY: ' + body);
-    // ...and/or process the entire body here.
-  })
-});
-
-req.on('error', function(e) {
-  console.log('ERROR: ' + e.message);
-});*/
-
 console.log("Listening at " + port);
 
 
