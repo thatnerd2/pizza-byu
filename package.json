@@ -18,6 +18,7 @@
   "homepage": "https://bitbucket.org/thatnerd2/pizza-byu#readme",
   "dependencies": {
     "better-console": "^0.2.4",
+    "byu-cas": "^1.0.1",
     "del": "^2.2.0",
     "express": "^4.13.4",
     "extend": "^3.0.0",

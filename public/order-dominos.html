@@ -65,15 +65,45 @@
               <div id="store-picker-text" class="text">Available Stores:</div>
               <i class="dropdown icon"></i>
               <div id="store-picker-content" class="menu">
-                <div class="item">AJAX populates this</div>
+                <div class="item">156 W 1230 N, Provo, UT 84604</div>
               </div>
             </div>
             <br /><br />
-            <p>We suggest: <b>SUGGESTION_HERE</b></p>
+            <p>We suggest: <b>S156 W 1230 N, Provo, UT 84604</b></p>
             <p>This is the closest store to you, is open right now, and does delivery.</p>
 
             <div class="ui horizontal divider">Customize Order</div>
-            <p>Dominos stuff goes in here</p>
+            <div id="size-picker" class="ui selection dropdown">
+              <div id="size-picker-text" class="text">Choose Pizza Size</div>
+              <i class="dropdown icon"></i>
+              <div id="size-picker-content" class="menu">
+                <div class="item">Small (10")</div>
+                <div class="item">Medium (12")</div>
+                <div class="item">Large (14")</div>
+                <div class="item">Extra Large (16")</div>
+              </div>
+            </div>
+            <br /><br /><br />
+            <div id="type-picker" class="ui selection dropdown">
+              <div id="type-picker-text" class="text">Choose Pizza Type</div>
+              <i class="dropdown icon"></i>
+              <div id="type-picker-content" class="menu">
+                <div class="item">Cheese</div>
+                <div class="item">Pepperoni</div>
+                <div class="item">Hawaiian</div>
+                <div class="item">Barbeque</div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
 
             <div class="ui horizontal divider">Billing</div>
             <div class="ui icon message">
@@ -85,15 +115,7 @@
                 <p>Make sure that when logging in, you are directed to a BYU website (cas.byu.edu).  We do not know your credentials - only you and BYU do.</p>
               </div>
             </div>
-            <a class="ui green button" href="auth.html">Click here to authenticate with your Net ID.</a>
-            
-            <div class="ui horizontal divider">Confirm</div>
-            <p>Some javascript generated stuff here.  Validation too!</p>
-
-            <div class="ui horizontal divider">Submit</div>
-            <a class="ui black button">Submit your order</a>
-
-            <p>Thank you for using our website!  It really does mean a lot! <i class="smile icon"></i></p>
+            <button id="auth-user" class="ui disabled green button" href="http://cas.byu.edu/cas/login?service=http%3A%2F%2Flocalhost%3A4004%2Fconfirm.html%3Forder%3Dhey">Click here to authenticate with your Net ID.</button>
           </div>
         </div>
       </div>
@@ -115,8 +137,38 @@
         $("#step-store").removeClass("active").addClass("completed");
         $("#step-order").addClass("active");
         currentStep = 1;
+
+        $("#size-picker").dropdown({ onChange: checkOrderCompletion });
+        $("#type-picker").dropdown({ onChange: checkOrderCompletion });
       }
     }
   });
+
+  $("#auth-user").click(function () {
+    var params = "ord=" + $("#size-picker-text").html() + "999" + $("#type-picker-text").html() + "999" + $("#store-picker-text").html();
+    var typeParam = "ty=" + $("#type-picker-text").html();
+    //console.log(typeParam);
+    // Type param doesn't go through
+    var caslink = "https://cas.byu.edu/cas/login?service=http://localhost:4004/confirm.html?" + params + "&" + typeParam;
+    window.location.href = caslink;
+  });
+
+  function checkOrderCompletion () {
+    if (currentStep == 1) {
+      if ($("#size-picker-text").html() != "Choose Pizza Size" &&
+          $("#type-picker-text").html() != "Choose Pizza Type") {
+        $("#step-order").removeClass("active").addClass("completed");
+        $("#step-billing").addClass("active");
+        $("#auth-user").removeClass("disabled");
+        currentStep = 2;
+      }
+    }
+  }
+
+  function encode(unencoded) {
+    return encodeURIComponent(unencoded).replace(/'/g,"%27").replace(/"/g,"%22");  
+  }
+
+  
 </script>
 </html>

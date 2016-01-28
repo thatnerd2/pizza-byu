@@ -1,32 +1,67 @@
 var dominos = require("pizzapi");
 var app = require('express')();
 var express = require('express');
-var server = require('http').Server(app);
-
-dominos.Util.findNearbyStores(
+var http = require('http');
+var server = http.Server(app);
+var fs = require('fs');
+var port = process.env.PORT || 4004
+/*dominos.Util.findNearbyStores(
 	'25 Heritage Halls, Provo, UT, 84604',
 	'Delivery',
 	function(storeData){
 		if (!storeData.success) return;
 
-		// Algorithm
-		// naively we choose the store with the min distance
-		// and the store that allows delivery orders
-		// and the store that is open
-		// 
 		var stores = storeData.result.Stores;
-    for (var i = 0; i < stores.length; i++) {
-      console.log(stores[i]);
-    }
-		//console.log(storeData);
+    var sample = new dominos.Store({ID: stores[0].StoreID});
+    console.log("Store ID:  " + stores[0].StoreID);
+    sample.getMenu(function(obj){
+      if (!obj.success) return;
+      var data = obj.result;*/
+      /*deleteThese = ["Categorizations", "Coupons", "Sides", "UnsupportedProducts", "UnsupportedOptions", "CookingInstructions", "CookingInstructionGroups"];
+      for (var i = 0; i < deleteThese.length; i++) delete data[deleteThese[i]]*/
+
+      //console.log(data);
+        /*fs.writeFile("menu.json", JSON.stringify(data), function(err) {
+          if(err) return console.log(err);
+          console.log("The file was saved!");
+        }); */
+    /*})
 	}
-);
+);*/
 
 app.use(express.static('public'));
-server.listen(process.env.PORT || 4004);
+server.listen(port);
 
-console.log("Listening.");
 
+
+/*var options = {
+  host: 'api.byu.edu',
+  path: '/rest/v1/basicauth/treasury/cougar-cash/balance'
+};
+
+https://api.byu.edu/rest/v1/basicauth/treasury/cougar-cash/balance'
+var req = http.get(options, function(res) {
+  console.log("I'M BACK!");
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+
+  // Buffer the body entirely for processing as a whole.
+  var bodyChunks = [];
+  res.on('data', function(chunk) {
+    // You can process streamed parts here...
+    bodyChunks.push(chunk);
+  }).on('end', function() {
+    var body = Buffer.concat(bodyChunks);
+    console.log('BODY: ' + body);
+    // ...and/or process the entire body here.
+  })
+});
+
+req.on('error', function(e) {
+  console.log('ERROR: ' + e.message);
+});*/
+
+console.log("Listening at " + port);
 
 
 /*

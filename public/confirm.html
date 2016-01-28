@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+	<script src="semantic/dist/jquery-2.2.0.min.js"></script>
+	<script src="semantic/dist/semantic.min.js"></script>
+</head>
+
+<body>
+
+	<div class="ui grid">
+    <div class="two wide column"></div>
+    <div class="twelve wide column">
+      <div class="row">
+        <div class="ui huge message">
+          <center><h2>Create your Order</h2></center>
+        </div>
+      </div>
+      <div style="padding-bottom: 20px;" class="row"></div>
+      <div class="ui grid">
+        <div class="row">
+      		<div class="five wide column">
+            <div class="ui vertical steps">
+              <div id="step-store" class="completed step">
+                <i class="building icon"></i>
+                <div class="content">
+                  <div class="title">Store</div>
+                  <div class="description">Choose your store location.</div>
+                </div>
+              </div>
+              <div id="step-order" class="completed step">
+                <i class="food icon"></i>
+                <div class="content">
+                  <div class="title">Order</div>
+                  <div class="description">Customize your pizza.</div>
+                </div>
+              </div>
+              <div id="step-billing" class="completed step">
+                <i class="credit card icon"></i>
+                <div class="content">
+                  <div class="title">Billing</div>
+                  <div class="description">Sign in to your Net ID to pay with<br /> Dining Dollars or Cougar Cash.</div>
+                </div>
+              </div>
+              <div id="step-confirm" class="active step">
+                <i class="info icon"></i>
+                <div class="content">
+                  <div class="title">Confirm Order</div>
+                  <div class="description">Verify order details</div>
+                </div>
+              </div>
+              <div id="step-submit" class="step">
+                <i class="car icon"></i>
+                <div class="content">
+                  <div class="title">Get Pizza</div>
+                  <div class="description">Submit your order,</br /> get tracking right from Dominos.</div>
+                </div>
+              </div>
+            </div>
+            <a href="index.html" class="ui red button">Cancel</a>
+      		</div>
+          <div class="eleven wide column">
+            <div class="ui horizontal divider">Confirm Order</div>
+            <b>Your Order</b>
+            <div id="order-text">
+
+            </div>
+
+            <button id="validate-order" class="ui blue button">Validate</button>
+
+            <div class="ui horizontal divider">Submit</div>
+            <a class="ui disabled black button">Submit your order</a>
+
+            <p>Thank you for using our website!  It really does mean a lot! <i class="smile icon"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="two wide column"></div>
+
+
+
+	</div>
+
+</body>
+
+<script>
+function decode(encoded) {
+  return decodeURIComponent(encoded.replace(/\+/g,  " "));
+}
+
+$("#validate-order").click(function () {
+  $("#submit-order").removeClass("disabled");
+  $("#validate-order").addClass("disabled");
+  $("#step-confirm").removeClass("active").addClass("completed");
+  $("#step-submit").addClass("active");
+});
+
+var url = window.location.href
+console.log("URL: " + url);
+var getQuery = url.split('?')[1]
+var params = getQuery.split('&');
+var pObj = {};
+for (var i = 0; i < params.length; i++) {
+  var parts = params[i].split("=");
+  if (parts[0] == "ord") {
+    pObj["size"] = decode(parts[1].split("999")[0]);
+    pObj["type"] = decode(parts[1].split("999")[1]);
+    pObj["loc"] = decode(parts[1].split("999")[2]);
+  }
+  else pObj[parts[0]] = decode(parts[1]);
+}
+$("#order-text").html("<p>Size: " + pObj["size"] + "</p><p>Type: " + pObj["type"] + "</p><p>From: " + pObj["loc"] + "</p>");
+
+console.log(JSON.stringify(pObj));
+</script>
+</html>
